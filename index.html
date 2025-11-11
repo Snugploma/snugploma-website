@@ -7,33 +7,61 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .animate-fade-in { animation: fadeIn 0.8s ease-out; }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-60px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(60px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+    .animate-fade-in { animation: fadeIn 1s ease-out; }
+    .animate-breathe { animation: breathe 4s ease-in-out infinite; }
+    .animate-float { animation: float 4s ease-in-out infinite; }
+    .animate-slide-left { animation: slideInLeft 1s ease-out; }
+    .animate-slide-right { animation: slideInRight 1s ease-out; }
+    .animate-pulse-slow { animation: pulse 3s ease-in-out infinite; }
     * { scroll-behavior: smooth; }
+    .hover-lift { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .hover-lift:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(74, 60, 46, 0.2); }
+    .gradient-text { background: linear-gradient(135deg, #4A3C2E 0%, #B8926A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   </style>
 </head>
 <body class="bg-[#E8E3D5]">
   
   <!-- Navigation -->
-  <nav class="fixed w-full bg-[#E8E3D5] shadow-lg z-50">
+  <nav class="fixed w-full bg-[#E8E3D5] shadow-lg z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 py-4">
       <div class="flex justify-between items-center">
-        <div class="flex items-center gap-3 cursor-pointer" onclick="scrollToSection('hero')">
-          <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-12 h-12">
+        <div class="flex items-center gap-4 cursor-pointer group" onclick="scrollToSection('hero')">
+          <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-20 h-20 transition-transform duration-300 group-hover:scale-110">
           <div>
-            <div class="text-2xl font-bold text-[#4A3C2E]">Snugploma</div>
-            <div class="text-xs text-[#6B5A47] italic hidden md:block">The Warmest Way to Say "Congrats."</div>
+            <div class="text-3xl font-bold text-[#4A3C2E] transition-colors group-hover:text-[#B8926A]">Snugploma</div>
+            <div class="text-sm text-[#6B5A47] italic hidden md:block">The Warmest Way to Say "Congrats."</div>
           </div>
         </div>
         
         <div class="hidden md:flex gap-6 items-center">
-          <a href="#about" class="text-[#4A3C2E] hover:text-[#B8926A] font-medium">About</a>
-          <a href="#product" class="text-[#4A3C2E] hover:text-[#B8926A] font-medium">Product</a>
-          <a href="#how-it-works" class="text-[#4A3C2E] hover:text-[#B8926A] font-medium">How It Works</a>
-          <a href="#contact" class="text-[#4A3C2E] hover:text-[#B8926A] font-medium">Contact</a>
-          <a href="#upload" class="bg-[#4A3C2E] text-[#E8E3D5] px-6 py-2 rounded-full hover:bg-[#B8926A] transition-all font-medium">Order Now</a>
+          <a href="#about" class="text-[#4A3C2E] hover:text-[#B8926A] font-medium transition-all duration-300 hover:scale-110">About</a>
+          <a href="#product" class="text-[#4A3C2E] hover:text-[#B8926A] font-medium transition-all duration-300 hover:scale-110">Product</a>
+          <a href="#how-it-works" class="text-[#4A3C2E] hover:text-[#B8926A] font-medium transition-all duration-300 hover:scale-110">How It Works</a>
+          <a href="#contact" class="text-[#4A3C2E] hover:text-[#B8926A] font-medium transition-all duration-300 hover:scale-110">Contact</a>
+          <a href="#upload" class="bg-[#4A3C2E] text-[#E8E3D5] px-6 py-3 rounded-full hover:bg-[#B8926A] transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1">Order Now</a>
         </div>
         
         <button class="md:hidden" onclick="toggleMenu()">
@@ -54,16 +82,16 @@
   </nav>
 
   <!-- Hero Section -->
-  <section id="hero" class="pt-32 pb-20 px-4">
+  <section id="hero" class="pt-32 pb-20 px-4 overflow-hidden">
     <div class="max-w-7xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-12 items-center animate-fade-in">
-        <div class="space-y-8">
-          <div class="flex items-center gap-4 mb-6">
-            <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-20 h-20">
-            <div>
-              <h1 class="text-5xl font-bold text-[#4A3C2E]">Snugploma</h1>
-              <p class="text-sm text-[#6B5A47] italic">The Warmest Way to Say "Congrats."</p>
-            </div>
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div class="space-y-8 animate-slide-left">
+          <div class="text-center md:text-left">
+            <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-48 h-48 mx-auto md:mx-0 mb-6 animate-breathe">
+            <h1 class="text-6xl md:text-7xl font-bold mb-4">
+              <span class="gradient-text">Snugploma</span>
+            </h1>
+            <p class="text-xl text-[#6B5A47] italic mb-8">The Warmest Way to Say "Congrats."</p>
           </div>
           <h2 class="text-4xl md:text-5xl font-bold text-[#4A3C2E] leading-tight">
             Transform Your Diploma Into <span class="text-[#B8926A]">Comfort & Pride</span>
@@ -72,24 +100,24 @@
             A premium blanket that celebrates years of dedication, wraps you in comfort, and turns achievement into art.
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
-            <a href="#upload" class="bg-[#4A3C2E] text-[#E8E3D5] px-8 py-4 rounded-full hover:bg-[#B8926A] transition-all font-semibold text-lg shadow-lg text-center">
+            <a href="#upload" class="bg-[#4A3C2E] text-[#E8E3D5] px-8 py-4 rounded-full hover:bg-[#B8926A] transition-all duration-300 font-semibold text-lg shadow-lg text-center hover-lift">
               Create Your Snugploma
             </a>
-            <a href="#about" class="border-2 border-[#4A3C2E] text-[#4A3C2E] px-8 py-4 rounded-full hover:bg-[#4A3C2E] hover:text-[#E8E3D5] transition-all font-semibold text-lg text-center">
+            <a href="#about" class="border-2 border-[#4A3C2E] text-[#4A3C2E] px-8 py-4 rounded-full hover:bg-[#4A3C2E] hover:text-[#E8E3D5] transition-all duration-300 font-semibold text-lg text-center hover-lift">
               Our Story
             </a>
           </div>
         </div>
         
-        <div class="relative">
-          <div class="bg-gradient-to-br from-[#B8926A] to-[#8B6F47] rounded-3xl p-8 shadow-2xl">
-            <div class="bg-[#E8E3D5] rounded-2xl p-6 text-center">
-              <div class="text-6xl mb-4">🎓</div>
-              <h3 class="text-2xl font-bold text-[#4A3C2E] mb-2">Your Achievement</h3>
-              <p class="text-[#6B5A47] mb-4">Transformed into comfort</p>
-              <div class="border-4 border-[#4A3C2E] rounded-xl p-4 bg-white">
-                <div class="text-sm font-semibold text-[#4A3C2E]">50" × 60" Premium Fleece</div>
-                <div class="text-xs text-[#6B5A47] mt-2">Ultra-soft • Custom Printed • Forever Yours</div>
+        <div class="relative animate-slide-right">
+          <div class="bg-gradient-to-br from-[#B8926A] to-[#8B6F47] rounded-3xl p-8 shadow-2xl hover-lift animate-float">
+            <div class="bg-[#E8E3D5] rounded-2xl p-8 text-center">
+              <div class="text-7xl mb-6">🎓</div>
+              <h3 class="text-3xl font-bold text-[#4A3C2E] mb-3">Your Achievement</h3>
+              <p class="text-[#6B5A47] mb-6 text-lg">Transformed into comfort</p>
+              <div class="border-4 border-[#4A3C2E] rounded-xl p-6 bg-white">
+                <div class="text-lg font-semibold text-[#4A3C2E] mb-2">50" × 60" Premium Fleece</div>
+                <div class="text-sm text-[#6B5A47]">Ultra-soft • Custom Printed • Forever Yours</div>
               </div>
             </div>
           </div>
@@ -99,52 +127,56 @@
   </section>
 
   <!-- Mission -->
-  <section class="py-16 px-4 bg-[#4A3C2E]">
-    <div class="max-w-4xl mx-auto text-center">
-      <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-16 h-16 mx-auto mb-4 brightness-0 invert">
-      <h2 class="text-3xl md:text-4xl font-bold text-[#E8E3D5] mb-6">Our Mission</h2>
-      <p class="text-xl text-[#C9BFAA] leading-relaxed italic">
+  <section class="py-20 px-4 bg-[#4A3C2E] relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-10 left-10 w-64 h-64 bg-[#B8926A] rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 right-10 w-96 h-96 bg-[#B8926A] rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-24 h-24 mx-auto mb-6 brightness-0 invert animate-pulse-slow">
+      <h2 class="text-4xl md:text-5xl font-bold text-[#E8E3D5] mb-8">Our Mission</h2>
+      <p class="text-2xl text-[#C9BFAA] leading-relaxed italic">
         "To turn life's proudest academic moments into timeless treasures — honoring dedication, celebrating achievement, and wrapping every story in comfort."
       </p>
     </div>
   </section>
 
   <!-- About -->
-  <section id="about" class="py-20 px-4">
+  <section id="about" class="py-24 px-4">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl md:text-5xl font-bold text-[#4A3C2E] mb-4">How Snugploma Started</h2>
-        <div class="w-24 h-1 bg-[#B8926A] mx-auto"></div>
+      <div class="text-center mb-16 animate-fade-in">
+        <h2 class="text-5xl md:text-6xl font-bold text-[#4A3C2E] mb-6">How Snugploma Started</h2>
+        <div class="w-32 h-2 bg-[#B8926A] mx-auto rounded-full"></div>
       </div>
       
-      <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
         <div class="space-y-6 text-lg text-[#6B5A47] leading-relaxed">
-          <p>
+          <p class="animate-fade-in">
             Snugploma was born out of both a love for comfort and a deep respect for achievement. What began as a simple appreciation for seasonal blankets grew into something much more meaningful.
           </p>
-          <p>
+          <p class="animate-fade-in">
             As one of our founders approached graduation, after more than eight years of relentless hard work, it became clear how anticlimactic the moment could feel once the cap and gown were returned and the celebration ended.
           </p>
-          <p>
+          <p class="animate-fade-in">
             Years of dedication, perseverance, and personal sacrifice were symbolized by a single piece of paper — a diploma that too often ends up tucked away in a drawer or hung quietly on a wall.
           </p>
-          <p class="font-semibold text-[#4A3C2E]">
+          <p class="font-semibold text-[#4A3C2E] text-xl animate-fade-in">
             We wanted to change that. Instead of settling for something ordinary, we envisioned a way to transform this symbol of achievement into something lasting, personal, and boldly displayed.
           </p>
         </div>
         
-        <div class="bg-gradient-to-br from-[#B8926A] to-[#8B6F47] rounded-3xl p-8 shadow-xl">
-          <div class="bg-[#E8E3D5] rounded-2xl p-8 space-y-6">
-            <div class="text-6xl text-center">❤️</div>
-            <h3 class="text-2xl font-bold text-[#4A3C2E] text-center">Founded by Graduates, For Graduates</h3>
-            <div class="space-y-3">
-              <div class="text-center">
-                <p class="font-semibold text-[#4A3C2E]">Jasmine Chakkour, PharmD</p>
-                <p class="text-sm text-[#6B5A47]">Ferris State University</p>
+        <div class="bg-gradient-to-br from-[#B8926A] to-[#8B6F47] rounded-3xl p-8 shadow-2xl hover-lift">
+          <div class="bg-[#E8E3D5] rounded-2xl p-10 space-y-8">
+            <div class="text-7xl text-center animate-float">❤️</div>
+            <h3 class="text-3xl font-bold text-[#4A3C2E] text-center">Founded by Graduates, For Graduates</h3>
+            <div class="space-y-4">
+              <div class="text-center p-4 bg-white rounded-xl">
+                <p class="font-bold text-[#4A3C2E] text-lg">Jasmine Chakkour, PharmD</p>
+                <p class="text-[#6B5A47]">Ferris State University</p>
               </div>
-              <div class="text-center">
-                <p class="font-semibold text-[#4A3C2E]">Freddie McGee III, M.S.</p>
-                <p class="text-sm text-[#6B5A47]">Eastern Michigan University</p>
+              <div class="text-center p-4 bg-white rounded-xl">
+                <p class="font-bold text-[#4A3C2E] text-lg">Freddie McGee III, M.S.</p>
+                <p class="text-[#6B5A47]">Eastern Michigan University</p>
               </div>
             </div>
           </div>
@@ -154,36 +186,36 @@
   </section>
 
   <!-- Product -->
-  <section id="product" class="py-20 px-4 bg-gradient-to-b from-[#D4CDB9] to-[#E8E3D5]">
+  <section id="product" class="py-24 px-4 bg-gradient-to-b from-[#D4CDB9] to-[#E8E3D5]">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-[#4A3C2E] mb-4">The Snugploma Experience</h2>
-        <p class="text-xl text-[#6B5A47] max-w-3xl mx-auto">
+      <div class="text-center mb-20">
+        <h2 class="text-5xl md:text-6xl font-bold text-[#4A3C2E] mb-6">The Snugploma Experience</h2>
+        <p class="text-2xl text-[#6B5A47] max-w-3xl mx-auto">
           A premium diploma blanket that transforms your achievement into a work of art you can touch, display, and cherish every day.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8 mb-12">
-        <div class="bg-[#E8E3D5] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border-2 border-[#B8926A]">
-          <div class="text-4xl mb-4 text-center">✨</div>
-          <h3 class="text-xl font-bold text-[#4A3C2E] mb-3 text-center">Premium Materials</h3>
-          <p class="text-[#6B5A47] text-center">
+      <div class="grid md:grid-cols-3 gap-10 mb-16">
+        <div class="bg-[#E8E3D5] rounded-3xl p-10 shadow-xl hover-lift border-2 border-[#B8926A]">
+          <div class="text-6xl mb-6 text-center">✨</div>
+          <h3 class="text-2xl font-bold text-[#4A3C2E] mb-4 text-center">Premium Materials</h3>
+          <p class="text-[#6B5A47] text-center text-lg leading-relaxed">
             Ultra-soft fleece that's lightweight, warm, and maintains vibrant colors over time
           </p>
         </div>
 
-        <div class="bg-[#E8E3D5] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border-2 border-[#B8926A]">
-          <div class="text-4xl mb-4 text-center">🎨</div>
-          <h3 class="text-xl font-bold text-[#4A3C2E] mb-3 text-center">High-Detail Printing</h3>
-          <p class="text-[#6B5A47] text-center">
+        <div class="bg-[#E8E3D5] rounded-3xl p-10 shadow-xl hover-lift border-2 border-[#B8926A]">
+          <div class="text-6xl mb-6 text-center">🎨</div>
+          <h3 class="text-2xl font-bold text-[#4A3C2E] mb-4 text-center">High-Detail Printing</h3>
+          <p class="text-[#6B5A47] text-center text-lg leading-relaxed">
             Your diploma reproduced with precision, preserving every detail and color
           </p>
         </div>
 
-        <div class="bg-[#E8E3D5] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border-2 border-[#B8926A]">
-          <div class="text-4xl mb-4 text-center">📏</div>
-          <h3 class="text-xl font-bold text-[#4A3C2E] mb-3 text-center">Perfect Size</h3>
-          <p class="text-[#6B5A47] text-center">
+        <div class="bg-[#E8E3D5] rounded-3xl p-10 shadow-xl hover-lift border-2 border-[#B8926A]">
+          <div class="text-6xl mb-6 text-center">📏</div>
+          <h3 class="text-2xl font-bold text-[#4A3C2E] mb-4 text-center">Perfect Size</h3>
+          <p class="text-[#6B5A47] text-center text-lg leading-relaxed">
             50" × 60" throw size — ideal for display, comfort, and showcasing your achievement
           </p>
         </div>
@@ -192,53 +224,53 @@
   </section>
 
   <!-- How It Works -->
-  <section id="how-it-works" class="py-20 px-4">
+  <section id="how-it-works" class="py-24 px-4">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-[#4A3C2E] mb-4">How It Works</h2>
-        <p class="text-xl text-[#6B5A47]">Three simple steps to your perfect keepsake</p>
+      <div class="text-center mb-20">
+        <h2 class="text-5xl md:text-6xl font-bold text-[#4A3C2E] mb-6">How It Works</h2>
+        <p class="text-2xl text-[#6B5A47]">Three simple steps to your perfect keepsake</p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-3 gap-12">
         <div class="text-center">
-          <div class="bg-gradient-to-br from-[#B8926A] to-[#8B6F47] rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
-            <div class="text-4xl text-[#E8E3D5]">📤</div>
+          <div class="bg-gradient-to-br from-[#B8926A] to-[#8B6F47] rounded-full w-32 h-32 flex items-center justify-center mx-auto mb-8 hover-lift">
+            <div class="text-5xl text-[#E8E3D5]">📤</div>
           </div>
-          <div class="bg-[#E8E3D5] rounded-2xl p-6 shadow-lg border-2 border-[#B8926A]">
-            <h3 class="text-2xl font-bold text-[#4A3C2E] mb-3">1. Upload</h3>
-            <p class="text-[#6B5A47]">
+          <div class="bg-[#E8E3D5] rounded-3xl p-8 shadow-xl border-2 border-[#B8926A] hover-lift">
+            <h3 class="text-3xl font-bold text-[#4A3C2E] mb-4">1. Upload</h3>
+            <p class="text-[#6B5A47] text-lg leading-relaxed">
               Securely upload a high-resolution scan or photo of your diploma through our easy-to-use platform
             </p>
           </div>
         </div>
 
         <div class="text-center">
-          <div class="bg-gradient-to-br from-[#B8926A] to-[#8B6F47] rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
-            <div class="text-4xl text-[#E8E3D5]">👁️</div>
+          <div class="bg-gradient-to-br from-[#B8926A] to-[#8B6F47] rounded-full w-32 h-32 flex items-center justify-center mx-auto mb-8 hover-lift">
+            <div class="text-5xl text-[#E8E3D5]">👁️</div>
           </div>
-          <div class="bg-[#E8E3D5] rounded-2xl p-6 shadow-lg border-2 border-[#B8926A]">
-            <h3 class="text-2xl font-bold text-[#4A3C2E] mb-3">2. Preview</h3>
-            <p class="text-[#6B5A47]">
+          <div class="bg-[#E8E3D5] rounded-3xl p-8 shadow-xl border-2 border-[#B8926A] hover-lift">
+            <h3 class="text-3xl font-bold text-[#4A3C2E] mb-4">2. Preview</h3>
+            <p class="text-[#6B5A47] text-lg leading-relaxed">
               Review a high-resolution mockup of your blanket to ensure every detail is perfect before production
             </p>
           </div>
         </div>
 
         <div class="text-center">
-          <div class="bg-gradient-to-br from-[#B8926A] to-[#8B6F47] rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
-            <div class="text-4xl text-[#E8E3D5]">📦</div>
+          <div class="bg-gradient-to-br from-[#B8926A] to-[#8B6F47] rounded-full w-32 h-32 flex items-center justify-center mx-auto mb-8 hover-lift">
+            <div class="text-5xl text-[#E8E3D5]">📦</div>
           </div>
-          <div class="bg-[#E8E3D5] rounded-2xl p-6 shadow-lg border-2 border-[#B8926A]">
-            <h3 class="text-2xl font-bold text-[#4A3C2E] mb-3">3. Receive</h3>
-            <p class="text-[#6B5A47]">
+          <div class="bg-[#E8E3D5] rounded-3xl p-8 shadow-xl border-2 border-[#B8926A] hover-lift">
+            <h3 class="text-3xl font-bold text-[#4A3C2E] mb-4">3. Receive</h3>
+            <p class="text-[#6B5A47] text-lg leading-relaxed">
               Your custom Snugploma arrives within 7-10 business days, ready to display and cherish
             </p>
           </div>
         </div>
       </div>
 
-      <div class="mt-12 text-center">
-        <a href="#upload" class="bg-[#4A3C2E] text-[#E8E3D5] px-10 py-4 rounded-full hover:bg-[#B8926A] transition-all font-semibold text-lg shadow-lg inline-block">
+      <div class="mt-16 text-center">
+        <a href="#upload" class="inline-block bg-[#4A3C2E] text-[#E8E3D5] px-12 py-5 rounded-full hover:bg-[#B8926A] transition-all duration-300 font-semibold text-xl shadow-2xl hover-lift">
           Start Your Order
         </a>
       </div>
@@ -246,47 +278,48 @@
   </section>
 
   <!-- Upload Section -->
-  <section id="upload" class="py-20 px-4 bg-gradient-to-b from-[#D4CDB9] to-[#E8E3D5]">
+  <section id="upload" class="py-24 px-4 bg-gradient-to-b from-[#D4CDB9] to-[#E8E3D5]">
     <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl md:text-5xl font-bold text-[#4A3C2E] mb-4">Create Your Snugploma</h2>
-        <p class="text-xl text-[#6B5A47]">Get started by uploading your diploma or contacting us</p>
+      <div class="text-center mb-16">
+        <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-32 h-32 mx-auto mb-6 animate-breathe">
+        <h2 class="text-5xl md:text-6xl font-bold text-[#4A3C2E] mb-6">Create Your Snugploma</h2>
+        <p class="text-2xl text-[#6B5A47]">Get started by uploading your diploma or contacting us</p>
       </div>
 
-      <div class="bg-white rounded-3xl p-8 border-4 border-[#B8926A] shadow-2xl">
+      <div class="bg-white rounded-3xl p-10 border-4 border-[#B8926A] shadow-2xl hover-lift">
         <form class="space-y-6">
           <div>
-            <label class="block text-[#4A3C2E] font-semibold mb-2">Full Name *</label>
-            <input type="text" required class="w-full px-4 py-3 border-2 border-[#B8926A] rounded-lg focus:outline-none focus:border-[#4A3C2E]">
+            <label class="block text-[#4A3C2E] font-semibold mb-2 text-lg">Full Name *</label>
+            <input type="text" required class="w-full px-4 py-4 border-2 border-[#B8926A] rounded-lg focus:outline-none focus:border-[#4A3C2E] text-lg transition-all">
           </div>
           
           <div>
-            <label class="block text-[#4A3C2E] font-semibold mb-2">Email Address *</label>
-            <input type="email" required class="w-full px-4 py-3 border-2 border-[#B8926A] rounded-lg focus:outline-none focus:border-[#4A3C2E]">
+            <label class="block text-[#4A3C2E] font-semibold mb-2 text-lg">Email Address *</label>
+            <input type="email" required class="w-full px-4 py-4 border-2 border-[#B8926A] rounded-lg focus:outline-none focus:border-[#4A3C2E] text-lg transition-all">
           </div>
           
           <div>
-            <label class="block text-[#4A3C2E] font-semibold mb-2">University Name</label>
-            <input type="text" class="w-full px-4 py-3 border-2 border-[#B8926A] rounded-lg focus:outline-none focus:border-[#4A3C2E]">
+            <label class="block text-[#4A3C2E] font-semibold mb-2 text-lg">University Name</label>
+            <input type="text" class="w-full px-4 py-4 border-2 border-[#B8926A] rounded-lg focus:outline-none focus:border-[#4A3C2E] text-lg transition-all">
           </div>
           
-          <div class="border-4 border-dashed border-[#B8926A] rounded-2xl p-12 text-center cursor-pointer hover:border-[#4A3C2E] hover:bg-[#F5F2EB] transition-all">
-            <div class="text-6xl mb-4">📤</div>
-            <h3 class="text-xl font-bold text-[#4A3C2E] mb-2">Upload Your Diploma</h3>
-            <p class="text-[#6B5A47]">or drag and drop</p>
-            <p class="text-sm text-[#6B5A47] mt-2">JPG, PNG, or PDF (max 200MB)</p>
+          <div class="border-4 border-dashed border-[#B8926A] rounded-2xl p-16 text-center cursor-pointer hover:border-[#4A3C2E] hover:bg-[#F5F2EB] transition-all">
+            <div class="text-7xl mb-6">📤</div>
+            <h3 class="text-2xl font-bold text-[#4A3C2E] mb-3">Upload Your Diploma</h3>
+            <p class="text-[#6B5A47] text-lg mb-2">or drag and drop</p>
+            <p class="text-[#6B5A47]">JPG, PNG, or PDF (max 200MB)</p>
           </div>
 
-          <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
-            <h4 class="font-semibold text-[#4A3C2E] mb-2">Upload Requirements:</h4>
-            <ul class="text-sm text-[#6B5A47] space-y-1">
-              <li>✓ Maximum file size: 200 MB</li>
-              <li>✓ Minimum resolution: 1500x1500 pixels</li>
-              <li>✓ Accepted formats: JPG, PNG, PDF</li>
+          <div class="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
+            <h4 class="font-bold text-[#4A3C2E] mb-3 text-lg">Upload Requirements:</h4>
+            <ul class="text-[#6B5A47] space-y-2">
+              <li class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Maximum file size: 200 MB</li>
+              <li class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Minimum resolution: 1500x1500 pixels</li>
+              <li class="flex items-center gap-2"><span class="text-green-600 font-bold">✓</span> Accepted formats: JPG, PNG, PDF</li>
             </ul>
           </div>
           
-          <button type="submit" class="w-full bg-[#4A3C2E] text-white px-8 py-4 rounded-2xl hover:bg-[#B8926A] transition-all font-bold text-lg shadow-xl">
+          <button type="submit" class="w-full bg-[#4A3C2E] text-white px-8 py-5 rounded-2xl hover:bg-[#B8926A] transition-all font-bold text-xl shadow-2xl hover-lift">
             Submit Order Request
           </button>
         </form>
@@ -295,27 +328,27 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="py-20 px-4">
+  <section id="contact" class="py-24 px-4">
     <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl md:text-5xl font-bold text-[#4A3C2E] mb-4">Get In Touch</h2>
-        <p class="text-xl text-[#6B5A47]">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl md:text-6xl font-bold text-[#4A3C2E] mb-6">Get In Touch</h2>
+        <p class="text-2xl text-[#6B5A47]">
           We'd love to hear from you and help celebrate your achievement
         </p>
       </div>
 
-      <div class="bg-gradient-to-br from-[#B8926A] to-[#8B6F47] rounded-3xl p-1 shadow-2xl">
-        <div class="bg-[#E8E3D5] rounded-3xl p-8 md:p-12">
+      <div class="bg-gradient-to-br from-[#B8926A] to-[#8B6F47] rounded-3xl p-2 shadow-2xl">
+        <div class="bg-[#E8E3D5] rounded-3xl p-12">
           <div class="text-center">
-            <div class="text-5xl mb-4">📧</div>
-            <h3 class="font-bold text-[#4A3C2E] mb-2 text-xl">Email</h3>
-            <a href="mailto:Snugploma@gmail.com" class="text-[#6B5A47] hover:text-[#B8926A] transition-colors text-lg">
+            <div class="text-7xl mb-6">📧</div>
+            <h3 class="font-bold text-[#4A3C2E] mb-4 text-2xl">Email</h3>
+            <a href="mailto:Snugploma@gmail.com" class="text-[#6B5A47] hover:text-[#B8926A] transition-colors text-2xl font-semibold">
               Snugploma@gmail.com
             </a>
             
-            <div class="mt-8">
-              <p class="text-lg text-[#6B5A47] mb-4">Visit us online at</p>
-              <a href="https://snugploma.com" class="text-2xl font-bold text-[#4A3C2E] hover:text-[#B8926A] transition-colors">
+            <div class="mt-10">
+              <p class="text-xl text-[#6B5A47] mb-4">Visit us online at</p>
+              <a href="https://snugploma.com" class="text-3xl font-bold text-[#4A3C2E] hover:text-[#B8926A] transition-colors">
                 Snugploma.com
               </a>
             </div>
@@ -326,16 +359,20 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-[#4A3C2E] text-[#E8E3D5] py-12 px-4">
-    <div class="max-w-6xl mx-auto text-center">
-      <div class="flex items-center justify-center gap-3 mb-4">
-        <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-12 h-12 brightness-0 invert">
-        <h3 class="text-3xl font-bold">Snugploma</h3>
+  <footer class="bg-[#4A3C2E] text-[#E8E3D5] py-16 px-4 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 left-0 w-96 h-96 bg-[#B8926A] rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-[#B8926A] rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-6xl mx-auto text-center relative z-10">
+      <div class="flex items-center justify-center gap-4 mb-6">
+        <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-20 h-20 brightness-0 invert animate-pulse-slow">
+        <h3 class="text-4xl font-bold">Snugploma</h3>
       </div>
-      <p class="text-[#C9BFAA] text-lg italic mb-6">
+      <p class="text-[#C9BFAA] text-2xl italic mb-8">
         "Let's create warmth worth remembering — together."
       </p>
-      <p class="text-[#C9BFAA] text-sm">
+      <p class="text-[#C9BFAA]">
         © 2024 Snugploma. All rights reserved.
       </p>
     </div>
