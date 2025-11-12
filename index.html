@@ -40,6 +40,17 @@
     .hover-lift { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
     .hover-lift:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(74, 60, 46, 0.2); }
     .gradient-text { background: linear-gradient(135deg, #4A3C2E 0%, #B8926A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    
+    /* Logo styling for different backgrounds */
+    .logo-on-beige {
+      /* Remove beige background by making similar colors transparent-ish */
+      mix-blend-mode: multiply;
+    }
+    .logo-on-dark {
+      /* Keep logo as-is on dark backgrounds - it will have its beige background */
+      mix-blend-mode: normal;
+      background: transparent;
+    }
   </style>
 </head>
 <body class="bg-[#E8E3D5]">
@@ -49,7 +60,7 @@
     <div class="max-w-7xl mx-auto px-4 py-4">
       <div class="flex justify-between items-center">
         <div class="flex items-center gap-4 cursor-pointer group" onclick="scrollToSection('hero')">
-          <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-20 h-20 transition-transform duration-300 group-hover:scale-110">
+          <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-20 h-20 transition-transform duration-300 group-hover:scale-110 logo-on-beige">
           <div>
             <div class="text-3xl font-bold text-[#4A3C2E] transition-colors group-hover:text-[#B8926A]">Snugploma</div>
             <div class="text-sm text-[#6B5A47] italic hidden md:block">The Warmest Way to Say "Congrats."</div>
@@ -86,7 +97,7 @@
     <div class="max-w-7xl mx-auto">
       <!-- ICONIC LOGO FIRST - CENTER OF ATTENTION -->
       <div class="text-center mb-16 animate-fade-in">
-        <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-80 h-80 mx-auto mb-8 animate-breathe drop-shadow-2xl">
+        <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-80 h-80 mx-auto mb-8 animate-breathe drop-shadow-2xl logo-on-beige">
         <h1 class="text-7xl md:text-8xl font-bold mb-4">
           <span class="gradient-text">Snugploma</span>
         </h1>
@@ -136,7 +147,7 @@
       <div class="absolute bottom-10 right-10 w-96 h-96 bg-[#B8926A] rounded-full blur-3xl"></div>
     </div>
     <div class="max-w-4xl mx-auto text-center relative z-10">
-      <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-24 h-24 mx-auto mb-6 animate-pulse-slow" style="filter: brightness(0) invert(1);">
+      <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-24 h-24 mx-auto mb-6 animate-pulse-slow logo-on-dark">
       <h2 class="text-4xl md:text-5xl font-bold text-[#E8E3D5] mb-8">Our Mission</h2>
       <p class="text-2xl text-[#C9BFAA] leading-relaxed italic">
         "To turn life's proudest academic moments into timeless treasures — honoring dedication, celebrating achievement, and wrapping every story in comfort."
@@ -284,7 +295,7 @@
   <section id="upload" class="py-24 px-4 bg-gradient-to-b from-[#D4CDB9] to-[#E8E3D5]">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-16">
-        <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-32 h-32 mx-auto mb-6 animate-breathe">
+        <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-32 h-32 mx-auto mb-6 animate-breathe logo-on-beige">
         <h2 class="text-5xl md:text-6xl font-bold text-[#4A3C2E] mb-6">Create Your Snugploma</h2>
         <p class="text-2xl text-[#6B5A47]">Get started by uploading your diploma or contacting us</p>
       </div>
@@ -369,7 +380,7 @@
     </div>
     <div class="max-w-6xl mx-auto text-center relative z-10">
       <div class="flex items-center justify-center gap-4 mb-6">
-        <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-20 h-20 animate-pulse-slow" style="filter: brightness(0) invert(1);">
+        <img src="snugploma-logo.png" alt="Snugploma Logo" class="w-20 h-20 animate-pulse-slow logo-on-dark">
         <h3 class="text-4xl font-bold">Snugploma</h3>
       </div>
       <p class="text-[#C9BFAA] text-2xl italic mb-8">
